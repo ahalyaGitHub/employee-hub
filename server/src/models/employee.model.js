@@ -1,0 +1,61 @@
+const mongoose  = require('mongoose');
+const employeeSchema = new mongoose.Schema({
+    name:{
+        firstName:{
+            type:String,
+            required:true,
+        },
+        lastName:{
+            type:String,
+            required:true,
+        }
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true,
+        trim:true,
+        lowercase:true,
+     },
+     password:{
+        type:String,
+        required:true,
+        trim:true,
+        minlength:5,
+     },
+     phone:{
+        type:Number,
+        //required:true,
+        unique:true,
+        trim:true,
+        minlength:10,
+        maxlength:10,
+     },
+     image:{
+        type:String,
+     },
+     address:{
+        city:{
+            type:String,
+        },
+        state:{
+            type:String,
+        },
+        country:{
+            type:String,
+        },
+        pincode:{
+            type:Number,
+            minlength:6,
+            maxlength:6,
+        }
+     },
+     role:{
+        type:String,
+        enum:['admin','employee'],
+        default:'employee',
+        required:true
+     }
+});
+const Employee = mongoose.model('Employee', employeeSchema);
+module.exports = Employee;
